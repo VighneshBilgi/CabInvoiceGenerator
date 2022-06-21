@@ -1,5 +1,7 @@
 package com.bridgelabz.cabinvoicegenerator;
 
+import java.util.Scanner;
+
 public class CabInvoiceGenerator {
 
     private static final double MINIMUM_COST_PER_KILOMETER = 10;
@@ -11,15 +13,20 @@ public class CabInvoiceGenerator {
         if(totalFare< MINIMUM_FARE){
             return MINIMUM_FARE;
         }
+
+        return totalFare;
+    }
+
+    public double calculateFare(Ride[] rides) {
+        double totalFare=0;
+        for (Ride ride:rides) {
+            totalFare += this.calculateFare(ride.distance,ride.time);
+        }
         return totalFare;
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Cab Invoice Generator:");
-
-        CabInvoiceGenerator cabInvoiceGenerator=new CabInvoiceGenerator();
-        double totalFare = cabInvoiceGenerator.calculateFare(30,90);
-        System.out.println(totalFare);
 
     }
 }
